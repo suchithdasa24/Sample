@@ -1,0 +1,20 @@
+//AWS
+FROM tomcat:9.0
+COPY target/*.war /usr/local/tomcat/webapps/ROOT.war
+CMD ["catalina.sh","run"]
+
+//Dockercompose.yml
+services:
+  mywebapp:
+    image: mysql:latest
+    container_name: labexam
+    ports:
+      - "8080:80"
+
+  myword:
+    image: wordpress:latest
+    container_name: wordplus
+    ports:
+      - "8081:80"
+    depends_on:
+      - mywebapp
